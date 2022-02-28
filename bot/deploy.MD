@@ -1,0 +1,1 @@
+helm upgrade bot ./chart --install --atomic --namespace mongo --timeout 2m --set-string redis_username_and_password="${{ secrets.REDIS_USERNAME_AND_PASSWORD }}" --set-string bot_token="${{ secrets.BOT_TOKEN }}" --set-string mongo_cert="${{ secrets.MONGO_CERT }}" --set-string mongo_key="${{ secrets.MONGO_KEY }}"
