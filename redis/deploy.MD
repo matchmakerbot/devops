@@ -1,0 +1,1 @@
+helm upgrade redis ./chart --install --atomic --namespace redis --timeout 2m --set-string redis_username="insert username" --set-string redis_password="insert password"

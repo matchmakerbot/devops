@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: "{{ .Release.Name }}-deployment"
+  labels:
+    app: "{{ .Release.Name }}-deployment"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "{{ .Release.Name }}-deployment"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Release.Name }}-deployment"
+    spec:
+      containers:
+        - image: redis:6.0.9-alpine
+          name: "{{ .Release.Name }}-pod"
+          args:
+            - /etc/redis/redis.conf
+          livenessProbe:
+            exec:
+              command:
+              - redis-cli
+              - ping
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+              - redis-cli
+              - ping
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          volumeMounts:
+          - name: temp
+            mountPath: /tmp
+          - name: data
+            mountPath: /data
+          - name: redis-config
+            mountPath: /etc/redis
+      volumes:
+      - name: temp
+        emptyDir: {}
+      - name: data
+        emptyDir: {}
+      - name: {{ .Release.Name }}-config
+        projected:
+          sources:
+          - configMap:
+              name: {{ .Release.Name }}-config
