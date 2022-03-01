@@ -1,25 +1,26 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  namespace: {{ .Release.Namespace }}
-  name: "{{ .Release.Name }}-deployment"
+  namespace: "{{ .Release.Namespace }}"
+  name: "{{ .Release.Name }}-standalone"
   labels:
-    app: "{{ .Release.Name }}-deployment"
+    app: "{{ .Release.Name }}-standalone"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "{{ .Release.Name }}-deployment"
+      app: "{{ .Release.Name }}-standalone"
+  serviceName: "{{ .Release.Name }}-standalone"
   template:
     metadata:
       labels:
-        app: "{{ .Release.Name }}-deployment"
+        app: "{{ .Release.Name }}-standalone"
     spec:
       containers:
         - image: mongo
           name: "{{ .Release.Name }}-pod"
-          args: 
-            - "--dbpath" 
+          args:
+            - "--dbpath"
             - "/data/db"
           livenessProbe:
             exec:

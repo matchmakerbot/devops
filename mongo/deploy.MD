@@ -1,1 +1,1 @@
-helm upgrade mongo ./chart --install --atomic --namespace mongo --timeout 2m --set-string mongo_username="insert username" --set-string mongo_password="insert password"
+helm upgrade mongo ./chart --install --atomic --namespace mongo --timeout 2m --set-string mongo.username="insert username" --set-string mongo.password="insert password"

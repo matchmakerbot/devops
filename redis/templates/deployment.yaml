@@ -1,19 +1,20 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   namespace: {{ .Release.Namespace }}
-  name: "{{ .Release.Name }}-deployment"
+  name: "{{ .Release.Name }}-standalone"
   labels:
-    app: "{{ .Release.Name }}-deployment"
+    app: "{{ .Release.Name }}-standalone"
 spec:
   replicas: 1
+  serviceName: "{{ .Release.Name }}-standalone"
   selector:
     matchLabels:
-      app: "{{ .Release.Name }}-deployment"
+      app: "{{ .Release.Name }}-standalone"
   template:
     metadata:
       labels:
-        app: "{{ .Release.Name }}-deployment"
+        app: "{{ .Release.Name }}-standalone"
     spec:
       containers:
         - image: redis:6.0.9-alpine

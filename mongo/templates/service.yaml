@@ -3,7 +3,7 @@ kind: Service
 metadata:
   namespace: {{ .Release.Namespace }}
   labels:
-    app: "{{ .Release.Name }}-deployment"
+    app: "{{ .Release.Name }}-standalone"
   name: "{{ .Release.Name }}-service"
 spec:
   ports:
@@ -12,6 +12,6 @@ spec:
     targetPort: 27017
     nodePort: 32000
   selector:
-    app: "{{ .Release.Name }}-deployment"
+    app: "{{ .Release.Name }}-standalone"
   type: NodePort
   
