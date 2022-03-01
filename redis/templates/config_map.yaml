@@ -12,8 +12,9 @@ data:
     #
     # ./redis-server /path/to/redis.conf
     #slaveof redis-master-0.redis-master.redis.svc.cluster.local 6379
-    masterauth {{ .Values.mongo_username | b64enc }}
-    requirepass asd
+  redis.conf1: "masterauth {{.Values.redis_password}}"
+  redis.conf2: "requirepass {{.Values.redis_password}}"
+  redis.conf3: |
     # Note on units: when memory size is needed, it is possible to specify
     # it in the usual form of 1k 5GB 4M and so forth:
     #
