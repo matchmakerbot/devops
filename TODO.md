@@ -1,1 +1,0 @@
-Change redis and mongo to sstatefulsets instead of deployments.
