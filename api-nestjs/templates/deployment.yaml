@@ -26,8 +26,8 @@ spec:
               cpu: 200m
               memory: 256Mi
           envFrom:
-          - secretRef:
-              name: "{{ .Release.Name }}-secret"
+            - secretRef:
+                name: "{{ .Release.Name }}-secret"
           readinessProbe:
             httpGet:
               path: /healthz

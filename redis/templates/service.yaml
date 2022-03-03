@@ -1,17 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: {{ .Release.Namespace }}
+  namespace: "{{ .Release.Namespace }}"
   labels:
     app: "{{ .Release.Name }}-standalone"
   name: "{{ .Release.Name }}-service"
 spec:
   ports:
-  - port: 6379
-    protocol: TCP
-    targetPort: 6379
-    nodePort: 32001
+    - port: 6379
+      protocol: TCP
+      targetPort: 6379
+      nodePort: 32001
   selector:
     app: "{{ .Release.Name }}-standalone"
   type: NodePort
-  
