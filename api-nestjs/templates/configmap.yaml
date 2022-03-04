@@ -4,6 +4,4 @@ metadata:
   name: "{{ .Release.Name }}-config"
   namespace: "{{ .Release.Namespace }}"
 data:
-  PREFIX: "!"
-  REDIS_HOST: redis-headless.redis.svc.cluster.local
   MONGO_HOST:  mongo-headless.mongo.svc.cluster.local

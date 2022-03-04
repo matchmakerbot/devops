@@ -56,4 +56,3 @@ spec:
         - name: "{{ .Release.Name }}-pv"
           persistentVolumeClaim:
             claimName: "{{ .Release.Name }}-pvc"
-
