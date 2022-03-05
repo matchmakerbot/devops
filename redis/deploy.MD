@@ -1,1 +1,1 @@
-helm upgrade redis ./chart --install --atomic --namespace redis --timeout 2m --set-string redis.password="insert password"
+helm upgrade redis ./chart --install --atomic --namespace redis --timeout 1m --set-string redis.password="insert password"
