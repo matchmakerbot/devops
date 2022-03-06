@@ -21,7 +21,7 @@ spec:
           name: "{{ .Release.Name }}-pod"
           args:
             - "--dbpath"
-            - "/data/db"
+            - "/data/mongo"
           livenessProbe:
             exec:
               command:
