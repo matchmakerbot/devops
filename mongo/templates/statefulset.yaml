@@ -21,7 +21,7 @@ spec:
           name: "{{ .Release.Name }}-pod"
           args:
             - "--dbpath"
-            - "/data/mongo"
+            - "/data/db"
           livenessProbe:
             exec:
               command:
@@ -46,12 +46,20 @@ spec:
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 3
-          envFrom:
-            - secretRef:
+          env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
                 name: "{{ .Release.Name }}-secret"
+                key: username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Release.Name }}-secret"
+                key: password
           volumeMounts:
             - name: "{{ .Release.Name }}-pv"
-              mountPath: /data/mongo
+              mountPath: /data/db
       volumes:
         - name: "{{ .Release.Name }}-pv"
           persistentVolumeClaim:
