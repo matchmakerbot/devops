@@ -28,7 +28,7 @@ spec:
               path: /healthz
               port: 3000
             failureThreshold: 1
-            initialDelaySeconds: 10
+            initialDelaySeconds: 60
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 2
@@ -37,7 +37,7 @@ spec:
               path: /healthz
               port: 3000
             failureThreshold: 3
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             periodSeconds: 20
             successThreshold: 1
             timeoutSeconds: 2
