@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Release.Name }}-deployment"
   namespace: "{{ .Release.Namespace }}"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: "{{ .Release.Name }}"
@@ -17,14 +17,7 @@ spec:
         - name: "{{ .Release.Name }}"
           image: "ghcr.io/matchmakerbot/{{ .Release.Name }}:latest"
           ports:
-            - containerPort: 3000
-          resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
-              cpu: 200m
-              memory: 256Mi
+            - containerPort: 8080
           envFrom:
             - secretRef:
                 name: "{{ .Release.Name }}-secret"
@@ -32,17 +25,17 @@ spec:
                 name: "{{ .Release.Name }}-config"
           readinessProbe:
             httpGet:
-              path: /healthz
-              port: 3000
-            failureThreshold: 1
-            initialDelaySeconds: 10
-            periodSeconds: 30
+              path: /api/v1/healthz
+              port: 8080
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 2
           livenessProbe:
             httpGet:
-              path: /healthz
-              port: 3000
+              path: /api/v1/healthz
+              port: 8080
             failureThreshold: 3
             initialDelaySeconds: 10
             periodSeconds: 20

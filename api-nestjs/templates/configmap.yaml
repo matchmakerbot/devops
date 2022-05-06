@@ -1,7 +1,8 @@
-apiVersion: api/v1
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: "{{ .Release.Name }}-config"
   namespace: "{{ .Release.Namespace }}"
 data:
-  MONGO_HOST:  mongo-service.mongo.svc.cluster.local
+  HOSTNAME: matchmakerbot.net
+  MONGO_HOST: mongo-service.mongo.svc.cluster.local

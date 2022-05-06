@@ -52,7 +52,11 @@ spec:
       - name: temp
         emptyDir: {}
       - name: data
-        emptyDir: {}
+          persistentVolumeClaim:
+            claimName: "{{ .Release.Name }}-pvc"
+      - name: redis-config
+          persistentVolumeClaim:
+            claimName: "{{ .Release.Name }}-pvc"
       - name: {{ .Release.Name }}-config
         projected:
           sources:
